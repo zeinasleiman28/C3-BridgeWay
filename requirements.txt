@@ -1,0 +1,6 @@
+openai
+gradio==6.30.0
+pypdf
+python-dotenv
+reportlab
+pytest

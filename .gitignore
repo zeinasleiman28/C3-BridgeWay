@@ -1,0 +1,14 @@
+# Secrets — never commit real API keys
+.env
+
+# Python / Jupyter clutter
+__pycache__/
+.ipynb_checkpoints/
+.pytest_cache/
+
+# Virtual environment
+venv/
+
+# Runtime logs (keep the folder itself via logs/.gitkeep)
+logs/*
+!logs/.gitkeep
