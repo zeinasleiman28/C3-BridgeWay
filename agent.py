@@ -59,7 +59,10 @@ def clean_history(history):
 
 def friendly_error(error):
     """Turn an exception into a message we can show to the user."""
-    if isinstance(error, openai.AuthenticationError):
+    # Gemini reports a bad key as a 400 BadRequestError ("Please pass a valid API key"), OpenAI as 401.
+    if isinstance(error, openai.AuthenticationError) or (
+        isinstance(error, openai.BadRequestError) and "api key" in str(error).lower()
+    ):
         return "⚠️ The AI service rejected our API key. Please check the key in .env."
     if isinstance(error, openai.RateLimitError):
         return "⚠️ The AI service is busy right now (rate limit). Please wait a moment and try again."
@@ -72,18 +75,20 @@ def friendly_error(error):
 
 def _assistant_tool_message(msg, call_ids):
     """Copy the model's tool-call message into a plain dict we can send back."""
-    return {
-        "role": "assistant",
-        "content": msg.content or "",
-        "tool_calls": [
-            {
-                "id": call_id,
-                "type": "function",
-                "function": {"name": call.function.name, "arguments": call.function.arguments or "{}"},
-            }
-            for call, call_id in zip(msg.tool_calls, call_ids)
-        ],
-    }
+    tool_calls = []
+    for call, call_id in zip(msg.tool_calls, call_ids):
+        entry = {
+            "id": call_id,
+            "type": "function",
+            "function": {"name": call.function.name, "arguments": call.function.arguments or "{}"},
+        }
+        # Gemini 3.x attaches a "thought_signature" under extra_content and rejects the next
+        # request if it is not echoed back with the tool call. Other providers have no such field.
+        extra_content = getattr(call, "extra_content", None)
+        if extra_content:
+            entry["extra_content"] = extra_content
+        tool_calls.append(entry)
+    return {"role": "assistant", "content": msg.content or "", "tool_calls": tool_calls}
 
 
 def run_agent(message, history, client, model, build_system_prompt, reflect=None):

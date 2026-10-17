@@ -22,7 +22,7 @@ PROVIDERS = {
     "gemini": {
         "key_env": "GEMINI_API_KEY",
         "base_url": "https://generativelanguage.googleapis.com/v1beta/openai/",
-        "default_model": "gemini-2.5-flash",
+        "default_model": "gemini-3.5-flash-lite",
     },
     "openai": {
         "key_env": "OPENAI_API_KEY",
@@ -46,7 +46,8 @@ def get_llm_settings():
     settings = PROVIDERS[provider]
 
     api_key = os.getenv(settings["key_env"], "").strip()
-    if not api_key or api_key.startswith("your-"):
+    # Treat the placeholders from .env.example / the README ("your-...", "paste-...", "<...>") as no key.
+    if not api_key or api_key.startswith(("your-", "paste-", "<")):
         raise LLMConfigError(
             f"No API key found for {provider}. Copy .env.example to .env and set {settings['key_env']}."
         )

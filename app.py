@@ -111,7 +111,7 @@ demo = gr.ChatInterface(
     examples=[
         "How much is a donor campaign for a small NGO?",
         "What's included in the partnership pitch pack?",
-        "Can you write our EU grant proposal?",
+        "We need someone to write our EU grant proposal. Is that something you offer?",
         "I'm Maya from GreenSteps, maya@greensteps.org, we need volunteers in March",
         "Leila's emails were wonderful, thank you!",
     ],

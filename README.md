@@ -76,7 +76,7 @@ Then open `.env` and add your key:
 ```ini
 LLM_PROVIDER=gemini              # or: openai
 GEMINI_API_KEY=...               # or OPENAI_API_KEY=... for openai
-# LLM_MODEL=                     # optional: default gemini-2.5-flash / gpt-4o-mini
+# LLM_MODEL=                     # optional: default gemini-3.5-flash-lite / gpt-4o-mini
 # USE_REFLECTION=true            # optional: set to false to skip reflection
 ```
 
@@ -97,7 +97,7 @@ Messages to try:
 |---|---|
 | "How much is a donor campaign for a small NGO?" | 600 minus 20% = **480 USD** |
 | "I'm Maya from GreenSteps, maya@greensteps.org, we need volunteers in March" | `record_customer_interest` |
-| "Can you write our EU grant proposal?" | Not offered → `record_feedback` |
+| "We need someone to write our EU grant proposal. Is that something you offer?" | Not offered → `record_feedback` |
 
 While chatting, the console shows the agent's decisions:
 

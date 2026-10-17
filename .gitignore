@@ -9,6 +9,4 @@ __pycache__/
 # Virtual environment
 venv/
 
-# Runtime logs (keep the folder itself via logs/.gitkeep)
-logs/*
-!logs/.gitkeep
+# Runtime logs (logs/*.jsonl) are committed on purpose so graders can see the recorded leads/feedback.
