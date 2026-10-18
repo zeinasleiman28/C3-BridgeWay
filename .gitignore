@@ -10,3 +10,6 @@ __pycache__/
 venv/
 
 # Runtime logs (logs/*.jsonl) are committed on purpose so graders can see the recorded leads/feedback.
+
+# Private working notes for the assistant (not part of the submission)
+CLAUDE.md

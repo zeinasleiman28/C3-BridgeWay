@@ -9,6 +9,8 @@ app_file: app.py
 pinned: false
 ---
 
+Demo video: [LINK]
+
 # 🤝 Bridgeway – Agent-Powered Business Assistant
 
 **EECE 503P – C3: Build an Agent-Powered Business Assistant**
@@ -108,7 +110,7 @@ While chatting, the console shows the agent's decisions:
 [REFLECTION] approved
 ```
 
-Everything is also saved in `logs/` (gitignored): `leads.jsonl`, `feedback.jsonl`, `router.jsonl`, `reflection.jsonl`.
+Everything is also saved in `logs/` (committed on purpose, so the recorded leads and feedback are visible in the repo): `leads.jsonl`, `feedback.jsonl`, `router.jsonl`, `reflection.jsonl`.
 
 ## Deploy to Hugging Face Spaces (bonus)
 
